@@ -5,8 +5,8 @@
 
 generator client {
   provider      = "prisma-client"
-  output        = "../src/generated/prisma"
-  module_format = "cjs"
+  output        = "../../src/generated/prisma"
+  module_format = "esm"
 }
 
 datasource db {
