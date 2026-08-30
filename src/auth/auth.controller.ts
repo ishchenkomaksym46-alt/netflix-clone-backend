@@ -1,14 +1,28 @@
-import {Body, Controller, Delete, Get, InternalServerErrorException, NotFoundException, Post} from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get, HttpException,
+  InternalServerErrorException,
+  NotFoundException,
+  Post,
+  Res
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {LoginDto, UserDto} from './dto/user.dto';
+import type { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('signup')
-  async signup(@Body() userDto: UserDto) {
+  async signup(@Body() userDto: UserDto, @Res({ passthrough: true }) res: Response) {
     const signup = await this.authService.signup(userDto);
+
+    if(!signup.access_token || !signup.refresh_token) {
+      throw new InternalServerErrorException("Failed to generate access token");
+    }
 
     if(!signup){
       throw new InternalServerErrorException("Server did not received an answer");
@@ -24,8 +38,26 @@ export class AuthController {
     }
 
     if(signup.status === 200){
-      return { status: 200, message: "User added successfully", access_token: signup.access_token };
+
+      res.cookie(signup.access_token, signup.access_token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 1000, // 1 hour
+      });
+
+      res.cookie(signup.refresh_token, signup.refresh_token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        path: '/auth',
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      });
+
+      return { status: 200, message: "User added successfully" };
     }
+
+    throw new InternalServerErrorException("Unknown error occurred during signup");
   }
 
   @Get('valid')

@@ -64,7 +64,7 @@ export class AuthService {
                 return { message: 'User already exists', error: 'User with this email already exists', status: 400 };
             }
 
-            const hash = bcrypt.hashSync(password, 8);
+            const hash = await bcrypt.hash(password, 8);
 
             const user = await this.prisma.users.create({
                 data: {
@@ -106,7 +106,7 @@ export class AuthService {
                 }
             });
 
-            return { status: 200, user, access_token: token };
+            return { status: 200, user, access_token: token, refresh_token };
         } catch (e: any) {
             console.error(e);
 
