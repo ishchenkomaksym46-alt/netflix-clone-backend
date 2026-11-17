@@ -12,30 +12,17 @@ export class AuthService {
                 private readonly configService: ConfigService) {
     }
 
-    async refreshToken(userId: string) {
+    async refreshToken(refreshToken: string) {
         const refresh_secret = this.configService.get<string>('JWT_REFRESH_SECRET');
 
-        if(!userId) {
-            return { status: 400, error: "Invalid user ID" };
+        if(!refreshToken) {
+            return { status: 400, error: "Invalid refresh token" };
         } else if (!refresh_secret) {
             return { status: 500, error: "Refresh secret not configured" };
         }
 
         try {
-            const refreshToken = await this.prisma.refreshTokens.findUnique({
-                where: {
-                    userId
-                },
-                select: {
-                    token: true
-                }
-            });
-
-            if (!refreshToken) {
-                return { status: 404, error: "Refresh token not found" };
-            }
-
-            const payload = await this.jwtService.verifyAsync(refreshToken.token, { secret: refresh_secret });
+            const payload = await this.jwtService.verifyAsync(refreshToken, { secret: refresh_secret });
 
             const access_token = await this.jwtService.signAsync({ sub: payload.sub, username: payload.username, role: payload.role }, {
                 secret: this.configService.get<string>('JWT_SECRET'),
@@ -44,7 +31,7 @@ export class AuthService {
 
             return { status: 200, access_token };
         } catch (e: any) {
-            return { status: 500, error: "Error occurred while refreshing token", message: e.message };
+            return { status: 401, error: "Invalid or expired refresh token", message: e.message };
         }
     }
 
@@ -99,13 +86,6 @@ export class AuthService {
             const refresh_token = await this.jwtService.signAsync(payload, { secret: refresh_secret,
                 expiresIn: refresh_expires_in as JwtSignOptions['expiresIn'] });
 
-            await this.prisma.refreshTokens.create({
-                data: {
-                    token: refresh_token,
-                    userId: user.id
-                }
-            });
-
             return { status: 200, user, access_token: token, refresh_token };
         } catch (e: any) {
             console.error(e);
@@ -157,6 +137,9 @@ export class AuthService {
             const refresh_secret = this.configService.get<string>('JWT_REFRESH_SECRET');
             const refresh_expires_in = this.configService.get<string>('JWT_REFRESH_EXPIRES_IN');
 
+            const secret = this.configService.get<string>('JWT_SECRET');
+            const secret_expires_in = this.configService.get<string>('JWT_EXPIRES_IN');
+
             if(!refresh_expires_in || !refresh_secret) {
                 return { status: 500, error: "JWT refresh token not configured", message: "Missing JWT refresh token in configuration" };
             }
@@ -171,38 +154,30 @@ export class AuthService {
                 secret: refresh_secret,
                 expiresIn: refresh_expires_in as JwtSignOptions['expiresIn']});
 
-            const accessToken = await this.refreshToken(user.id);
+            const access_token = await this.jwtService.signAsync(payload, {
+                secret: secret,
+                expiresIn: secret_expires_in as JwtSignOptions['expiresIn']});
 
-            if (accessToken.status !== 200) {
-                return { status: 500, error: "Error occurred while generating access token", message: accessToken.error };
-            }
-
-            await this.prisma.refreshTokens.update({
-                where: {
-                    userId: user.id
-                },
-                data: {
-                    token: refresh_token
-                }
-            });
-
-            return { status: 200, accessToken }
+            return { status: 200, access_token, refresh_token }
         } catch (e: any) {
             return { status: 500, error: "Error occurred during login", message: e.message };
         }
     }
 
-    async logout(userId: string) {
-        if (!userId) {
-            return { status: 400, error: "Invalid user id" };
+    async logout(accessToken: string) {
+        if (!accessToken) {
+            return { status: 400, error: "Invalid access token" };
         }
 
         try {
-            await this.prisma.refreshTokens.delete({
-                where: {
-                    userId
-                }
-            });
+            const payload = await this.jwtService.verifyAsync<{ sub: string }>(
+                accessToken,
+                { secret: this.configService.get<string>('JWT_SECRET') },
+            );
+
+            if(!payload.sub) {
+                return { status: 400, error: "Invalid access token" };
+            }
 
             return { status: 200, message: 'Logged out' };
         } catch (e: any) {

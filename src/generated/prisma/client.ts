@@ -45,11 +45,6 @@ export { Prisma }
  */
 export type Content = Prisma.ContentModel
 /**
- * Model RefreshTokens
- * 
- */
-export type RefreshTokens = Prisma.RefreshTokensModel
-/**
  * Model Studios
  * 
  */
