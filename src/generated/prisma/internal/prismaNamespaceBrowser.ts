@@ -52,7 +52,6 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Content: 'Content',
-  Studios: 'Studios',
   Users: 'Users'
 } as const
 
@@ -76,29 +75,15 @@ export const ContentScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  year: 'year',
   ageRating: 'ageRating',
   likes: 'likes',
-  studioId: 'studioId',
-  filmType: 'filmType',
+  director: 'director',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
-
-
-export const StudiosScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  location: 'location',
-  foundedAt: 'foundedAt',
-  followers: 'followers',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type StudiosScalarFieldEnum = (typeof StudiosScalarFieldEnum)[keyof typeof StudiosScalarFieldEnum]
 
 
 export const UsersScalarFieldEnum = {

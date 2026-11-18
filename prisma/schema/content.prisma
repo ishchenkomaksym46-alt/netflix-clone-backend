@@ -2,13 +2,10 @@ model Content {
   id          String  @id @default(cuid())
   title       String
   description String?
+  year        Int
   ageRating   String  @map("age_rating")
   likes       Int     @default(0)
-
-  studioId String  @map("studio_id")
-  studio   Studios @relation(fields: [studioId], references: [id])
-
-  filmType String @map("film_type")
+  director    String
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

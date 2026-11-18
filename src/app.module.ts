@@ -4,6 +4,7 @@ import {ConfigModule, ConfigService} from "@nestjs/config";
 import {PrismaService} from "./prisma.service";
 import {JwtModule} from "@nestjs/jwt";
 import { AdminModule } from './admin/admin.module';
+import { ContentModule } from './content/content.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { AdminModule } from './admin/admin.module';
       isGlobal: true,
     }),
     AuthModule,
-    AdminModule],
+    AdminModule,
+    ContentModule],
   controllers: [],
   providers: [PrismaService],
 })

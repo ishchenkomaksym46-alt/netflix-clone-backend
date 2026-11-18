@@ -4,7 +4,7 @@ import {
     Delete,
     Get,
     HttpStatus,
-    InternalServerErrorException,
+    InternalServerErrorException, Post,
     Req,
     UnauthorizedException, UseGuards
 } from "@nestjs/common";
@@ -62,6 +62,29 @@ export class AdminController {
         return { status: HttpStatus.OK, message: response.message };
     } catch (e) {
         throw new InternalServerErrorException('An error occurred while banning the user');
+    }
+  }
+
+  @Post('add-movie')
+  @UseGuards(RolesGuard)
+  async addMovie(@Body() body: { title: string, director: string, year: number, description?: string, ageRating: string }) {
+    const { title, director, year, ageRating } = body;
+    let { description } = body;
+
+    if(!description) {
+        description = "No description provided.";
+    }
+
+    try {
+        const response = await this.adminService.addMovie(title, director, year, description, ageRating);
+
+        if(!response) {
+            throw new InternalServerErrorException('An error occurred while adding the movie');
+        }
+
+        return { status: HttpStatus.OK, message: response.message };
+    } catch (e) {
+        throw new InternalServerErrorException('An error occurred while adding the movie');
     }
   }
 }

@@ -64,4 +64,22 @@ export class AdminService {
       return { status: 401, error: "Error occurred while banning user", message: e instanceof Error ? e.message : 'Unknown error' };
     }
   }
+
+  async addMovie(title: string, director: string, year: number, description: string, ageRating: string) {
+    try {
+      await this.prisma.content.create({
+        data: {
+          title,
+          director,
+          year,
+          description,
+          ageRating
+        }
+      });
+
+      return { status: 200, message: "Movie added successfully" };
+    } catch (e) {
+      return { status: 401, error: "Error occurred while adding movie", message: e instanceof Error ? e.message : 'Unknown error' };
+    }
+  }
 }

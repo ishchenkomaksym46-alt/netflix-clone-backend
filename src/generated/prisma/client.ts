@@ -45,11 +45,6 @@ export { Prisma }
  */
 export type Content = Prisma.ContentModel
 /**
- * Model Studios
- * 
- */
-export type Studios = Prisma.StudiosModel
-/**
  * Model Users
  * 
  */

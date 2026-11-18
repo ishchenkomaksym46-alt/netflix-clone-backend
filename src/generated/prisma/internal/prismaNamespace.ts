@@ -398,7 +398,6 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Content: 'Content',
-  Studios: 'Studios',
   Users: 'Users'
 } as const
 
@@ -415,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "content" | "studios" | "users"
+    modelProps: "content" | "users"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -490,80 +489,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ContentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ContentCountAggregateOutputType> | number
-        }
-      }
-    }
-    Studios: {
-      payload: Prisma.$StudiosPayload<ExtArgs>
-      fields: Prisma.StudiosFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.StudiosFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.StudiosFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        findFirst: {
-          args: Prisma.StudiosFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.StudiosFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        findMany: {
-          args: Prisma.StudiosFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>[]
-        }
-        create: {
-          args: Prisma.StudiosCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        createMany: {
-          args: Prisma.StudiosCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.StudiosCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>[]
-        }
-        delete: {
-          args: Prisma.StudiosDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        update: {
-          args: Prisma.StudiosUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        deleteMany: {
-          args: Prisma.StudiosDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.StudiosUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.StudiosUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>[]
-        }
-        upsert: {
-          args: Prisma.StudiosUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StudiosPayload>
-        }
-        aggregate: {
-          args: Prisma.StudiosAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStudios>
-        }
-        groupBy: {
-          args: Prisma.StudiosGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StudiosGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.StudiosCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StudiosCountAggregateOutputType> | number
         }
       }
     }
@@ -684,29 +609,15 @@ export const ContentScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
+  year: 'year',
   ageRating: 'ageRating',
   likes: 'likes',
-  studioId: 'studioId',
-  filmType: 'filmType',
+  director: 'director',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type ContentScalarFieldEnum = (typeof ContentScalarFieldEnum)[keyof typeof ContentScalarFieldEnum]
-
-
-export const StudiosScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  location: 'location',
-  foundedAt: 'foundedAt',
-  followers: 'followers',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type StudiosScalarFieldEnum = (typeof StudiosScalarFieldEnum)[keyof typeof StudiosScalarFieldEnum]
 
 
 export const UsersScalarFieldEnum = {
@@ -959,7 +870,6 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   content?: Prisma.ContentOmit
-  studios?: Prisma.StudiosOmit
   users?: Prisma.UsersOmit
 }
 

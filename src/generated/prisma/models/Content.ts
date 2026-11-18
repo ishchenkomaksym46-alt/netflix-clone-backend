@@ -27,10 +27,12 @@ export type AggregateContent = {
 }
 
 export type ContentAvgAggregateOutputType = {
+  year: number | null
   likes: number | null
 }
 
 export type ContentSumAggregateOutputType = {
+  year: number | null
   likes: number | null
 }
 
@@ -38,10 +40,10 @@ export type ContentMinAggregateOutputType = {
   id: string | null
   title: string | null
   description: string | null
+  year: number | null
   ageRating: string | null
   likes: number | null
-  studioId: string | null
-  filmType: string | null
+  director: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -50,10 +52,10 @@ export type ContentMaxAggregateOutputType = {
   id: string | null
   title: string | null
   description: string | null
+  year: number | null
   ageRating: string | null
   likes: number | null
-  studioId: string | null
-  filmType: string | null
+  director: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -62,10 +64,10 @@ export type ContentCountAggregateOutputType = {
   id: number
   title: number
   description: number
+  year: number
   ageRating: number
   likes: number
-  studioId: number
-  filmType: number
+  director: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -73,10 +75,12 @@ export type ContentCountAggregateOutputType = {
 
 
 export type ContentAvgAggregateInputType = {
+  year?: true
   likes?: true
 }
 
 export type ContentSumAggregateInputType = {
+  year?: true
   likes?: true
 }
 
@@ -84,10 +88,10 @@ export type ContentMinAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  year?: true
   ageRating?: true
   likes?: true
-  studioId?: true
-  filmType?: true
+  director?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -96,10 +100,10 @@ export type ContentMaxAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  year?: true
   ageRating?: true
   likes?: true
-  studioId?: true
-  filmType?: true
+  director?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -108,10 +112,10 @@ export type ContentCountAggregateInputType = {
   id?: true
   title?: true
   description?: true
+  year?: true
   ageRating?: true
   likes?: true
-  studioId?: true
-  filmType?: true
+  director?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -207,10 +211,10 @@ export type ContentGroupByOutputType = {
   id: string
   title: string
   description: string | null
+  year: number
   ageRating: string
   likes: number
-  studioId: string
-  filmType: string
+  director: string
   createdAt: Date
   updatedAt: Date
   _count: ContentCountAggregateOutputType | null
@@ -242,26 +246,24 @@ export type ContentWhereInput = {
   id?: Prisma.StringFilter<"Content"> | string
   title?: Prisma.StringFilter<"Content"> | string
   description?: Prisma.StringNullableFilter<"Content"> | string | null
+  year?: Prisma.IntFilter<"Content"> | number
   ageRating?: Prisma.StringFilter<"Content"> | string
   likes?: Prisma.IntFilter<"Content"> | number
-  studioId?: Prisma.StringFilter<"Content"> | string
-  filmType?: Prisma.StringFilter<"Content"> | string
+  director?: Prisma.StringFilter<"Content"> | string
   createdAt?: Prisma.DateTimeFilter<"Content"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Content"> | Date | string
-  studio?: Prisma.XOR<Prisma.StudiosScalarRelationFilter, Prisma.StudiosWhereInput>
 }
 
 export type ContentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  year?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-  studioId?: Prisma.SortOrder
-  filmType?: Prisma.SortOrder
+  director?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  studio?: Prisma.StudiosOrderByWithRelationInput
 }
 
 export type ContentWhereUniqueInput = Prisma.AtLeast<{
@@ -271,23 +273,22 @@ export type ContentWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.ContentWhereInput | Prisma.ContentWhereInput[]
   title?: Prisma.StringFilter<"Content"> | string
   description?: Prisma.StringNullableFilter<"Content"> | string | null
+  year?: Prisma.IntFilter<"Content"> | number
   ageRating?: Prisma.StringFilter<"Content"> | string
   likes?: Prisma.IntFilter<"Content"> | number
-  studioId?: Prisma.StringFilter<"Content"> | string
-  filmType?: Prisma.StringFilter<"Content"> | string
+  director?: Prisma.StringFilter<"Content"> | string
   createdAt?: Prisma.DateTimeFilter<"Content"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Content"> | Date | string
-  studio?: Prisma.XOR<Prisma.StudiosScalarRelationFilter, Prisma.StudiosWhereInput>
 }, "id">
 
 export type ContentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrderInput | Prisma.SortOrder
+  year?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-  studioId?: Prisma.SortOrder
-  filmType?: Prisma.SortOrder
+  director?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.ContentCountOrderByAggregateInput
@@ -304,10 +305,10 @@ export type ContentScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Content"> | string
   title?: Prisma.StringWithAggregatesFilter<"Content"> | string
   description?: Prisma.StringNullableWithAggregatesFilter<"Content"> | string | null
+  year?: Prisma.IntWithAggregatesFilter<"Content"> | number
   ageRating?: Prisma.StringWithAggregatesFilter<"Content"> | string
   likes?: Prisma.IntWithAggregatesFilter<"Content"> | number
-  studioId?: Prisma.StringWithAggregatesFilter<"Content"> | string
-  filmType?: Prisma.StringWithAggregatesFilter<"Content"> | string
+  director?: Prisma.StringWithAggregatesFilter<"Content"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Content"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Content"> | Date | string
 }
@@ -316,22 +317,22 @@ export type ContentCreateInput = {
   id?: string
   title: string
   description?: string | null
+  year: number
   ageRating: string
   likes?: number
-  filmType: string
+  director: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  studio: Prisma.StudiosCreateNestedOneWithoutFilmsInput
 }
 
 export type ContentUncheckedCreateInput = {
   id?: string
   title: string
   description?: string | null
+  year: number
   ageRating: string
   likes?: number
-  studioId: string
-  filmType: string
+  director: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -340,22 +341,22 @@ export type ContentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.IntFieldUpdateOperationsInput | number
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
+  director?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  studio?: Prisma.StudiosUpdateOneRequiredWithoutFilmsNestedInput
 }
 
 export type ContentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.IntFieldUpdateOperationsInput | number
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
-  studioId?: Prisma.StringFieldUpdateOperationsInput | string
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
+  director?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -364,10 +365,10 @@ export type ContentCreateManyInput = {
   id?: string
   title: string
   description?: string | null
+  year: number
   ageRating: string
   likes?: number
-  studioId: string
-  filmType: string
+  director: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -376,9 +377,10 @@ export type ContentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.IntFieldUpdateOperationsInput | number
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
+  director?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -387,10 +389,10 @@ export type ContentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  year?: Prisma.IntFieldUpdateOperationsInput | number
   ageRating?: Prisma.StringFieldUpdateOperationsInput | string
   likes?: Prisma.IntFieldUpdateOperationsInput | number
-  studioId?: Prisma.StringFieldUpdateOperationsInput | string
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
+  director?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -399,15 +401,16 @@ export type ContentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  year?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-  studioId?: Prisma.SortOrder
-  filmType?: Prisma.SortOrder
+  director?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ContentAvgOrderByAggregateInput = {
+  year?: Prisma.SortOrder
   likes?: Prisma.SortOrder
 }
 
@@ -415,10 +418,10 @@ export type ContentMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  year?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-  studioId?: Prisma.SortOrder
-  filmType?: Prisma.SortOrder
+  director?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -427,26 +430,17 @@ export type ContentMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
+  year?: Prisma.SortOrder
   ageRating?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-  studioId?: Prisma.SortOrder
-  filmType?: Prisma.SortOrder
+  director?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type ContentSumOrderByAggregateInput = {
+  year?: Prisma.SortOrder
   likes?: Prisma.SortOrder
-}
-
-export type ContentListRelationFilter = {
-  every?: Prisma.ContentWhereInput
-  some?: Prisma.ContentWhereInput
-  none?: Prisma.ContentWhereInput
-}
-
-export type ContentOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -469,232 +463,69 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type ContentCreateNestedManyWithoutStudioInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput> | Prisma.ContentCreateWithoutStudioInput[] | Prisma.ContentUncheckedCreateWithoutStudioInput[]
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutStudioInput | Prisma.ContentCreateOrConnectWithoutStudioInput[]
-  createMany?: Prisma.ContentCreateManyStudioInputEnvelope
-  connect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-}
-
-export type ContentUncheckedCreateNestedManyWithoutStudioInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput> | Prisma.ContentCreateWithoutStudioInput[] | Prisma.ContentUncheckedCreateWithoutStudioInput[]
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutStudioInput | Prisma.ContentCreateOrConnectWithoutStudioInput[]
-  createMany?: Prisma.ContentCreateManyStudioInputEnvelope
-  connect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-}
-
-export type ContentUpdateManyWithoutStudioNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput> | Prisma.ContentCreateWithoutStudioInput[] | Prisma.ContentUncheckedCreateWithoutStudioInput[]
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutStudioInput | Prisma.ContentCreateOrConnectWithoutStudioInput[]
-  upsert?: Prisma.ContentUpsertWithWhereUniqueWithoutStudioInput | Prisma.ContentUpsertWithWhereUniqueWithoutStudioInput[]
-  createMany?: Prisma.ContentCreateManyStudioInputEnvelope
-  set?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  disconnect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  delete?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  connect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  update?: Prisma.ContentUpdateWithWhereUniqueWithoutStudioInput | Prisma.ContentUpdateWithWhereUniqueWithoutStudioInput[]
-  updateMany?: Prisma.ContentUpdateManyWithWhereWithoutStudioInput | Prisma.ContentUpdateManyWithWhereWithoutStudioInput[]
-  deleteMany?: Prisma.ContentScalarWhereInput | Prisma.ContentScalarWhereInput[]
-}
-
-export type ContentUncheckedUpdateManyWithoutStudioNestedInput = {
-  create?: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput> | Prisma.ContentCreateWithoutStudioInput[] | Prisma.ContentUncheckedCreateWithoutStudioInput[]
-  connectOrCreate?: Prisma.ContentCreateOrConnectWithoutStudioInput | Prisma.ContentCreateOrConnectWithoutStudioInput[]
-  upsert?: Prisma.ContentUpsertWithWhereUniqueWithoutStudioInput | Prisma.ContentUpsertWithWhereUniqueWithoutStudioInput[]
-  createMany?: Prisma.ContentCreateManyStudioInputEnvelope
-  set?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  disconnect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  delete?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  connect?: Prisma.ContentWhereUniqueInput | Prisma.ContentWhereUniqueInput[]
-  update?: Prisma.ContentUpdateWithWhereUniqueWithoutStudioInput | Prisma.ContentUpdateWithWhereUniqueWithoutStudioInput[]
-  updateMany?: Prisma.ContentUpdateManyWithWhereWithoutStudioInput | Prisma.ContentUpdateManyWithWhereWithoutStudioInput[]
-  deleteMany?: Prisma.ContentScalarWhereInput | Prisma.ContentScalarWhereInput[]
-}
-
-export type ContentCreateWithoutStudioInput = {
-  id?: string
-  title: string
-  description?: string | null
-  ageRating: string
-  likes?: number
-  filmType: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ContentUncheckedCreateWithoutStudioInput = {
-  id?: string
-  title: string
-  description?: string | null
-  ageRating: string
-  likes?: number
-  filmType: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ContentCreateOrConnectWithoutStudioInput = {
-  where: Prisma.ContentWhereUniqueInput
-  create: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput>
-}
-
-export type ContentCreateManyStudioInputEnvelope = {
-  data: Prisma.ContentCreateManyStudioInput | Prisma.ContentCreateManyStudioInput[]
-  skipDuplicates?: boolean
-}
-
-export type ContentUpsertWithWhereUniqueWithoutStudioInput = {
-  where: Prisma.ContentWhereUniqueInput
-  update: Prisma.XOR<Prisma.ContentUpdateWithoutStudioInput, Prisma.ContentUncheckedUpdateWithoutStudioInput>
-  create: Prisma.XOR<Prisma.ContentCreateWithoutStudioInput, Prisma.ContentUncheckedCreateWithoutStudioInput>
-}
-
-export type ContentUpdateWithWhereUniqueWithoutStudioInput = {
-  where: Prisma.ContentWhereUniqueInput
-  data: Prisma.XOR<Prisma.ContentUpdateWithoutStudioInput, Prisma.ContentUncheckedUpdateWithoutStudioInput>
-}
-
-export type ContentUpdateManyWithWhereWithoutStudioInput = {
-  where: Prisma.ContentScalarWhereInput
-  data: Prisma.XOR<Prisma.ContentUpdateManyMutationInput, Prisma.ContentUncheckedUpdateManyWithoutStudioInput>
-}
-
-export type ContentScalarWhereInput = {
-  AND?: Prisma.ContentScalarWhereInput | Prisma.ContentScalarWhereInput[]
-  OR?: Prisma.ContentScalarWhereInput[]
-  NOT?: Prisma.ContentScalarWhereInput | Prisma.ContentScalarWhereInput[]
-  id?: Prisma.StringFilter<"Content"> | string
-  title?: Prisma.StringFilter<"Content"> | string
-  description?: Prisma.StringNullableFilter<"Content"> | string | null
-  ageRating?: Prisma.StringFilter<"Content"> | string
-  likes?: Prisma.IntFilter<"Content"> | number
-  studioId?: Prisma.StringFilter<"Content"> | string
-  filmType?: Prisma.StringFilter<"Content"> | string
-  createdAt?: Prisma.DateTimeFilter<"Content"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Content"> | Date | string
-}
-
-export type ContentCreateManyStudioInput = {
-  id?: string
-  title: string
-  description?: string | null
-  ageRating: string
-  likes?: number
-  filmType: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-}
-
-export type ContentUpdateWithoutStudioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ageRating?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ContentUncheckedUpdateWithoutStudioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ageRating?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type ContentUncheckedUpdateManyWithoutStudioInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  ageRating?: Prisma.StringFieldUpdateOperationsInput | string
-  likes?: Prisma.IntFieldUpdateOperationsInput | number
-  filmType?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 
 
 export type ContentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   description?: boolean
+  year?: boolean
   ageRating?: boolean
   likes?: boolean
-  studioId?: boolean
-  filmType?: boolean
+  director?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
 export type ContentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   description?: boolean
+  year?: boolean
   ageRating?: boolean
   likes?: boolean
-  studioId?: boolean
-  filmType?: boolean
+  director?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
 export type ContentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   description?: boolean
+  year?: boolean
   ageRating?: boolean
   likes?: boolean
-  studioId?: boolean
-  filmType?: boolean
+  director?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["content"]>
 
 export type ContentSelectScalar = {
   id?: boolean
   title?: boolean
   description?: boolean
+  year?: boolean
   ageRating?: boolean
   likes?: boolean
-  studioId?: boolean
-  filmType?: boolean
+  director?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "ageRating" | "likes" | "studioId" | "filmType" | "createdAt" | "updatedAt", ExtArgs["result"]["content"]>
-export type ContentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
-}
-export type ContentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
-}
-export type ContentIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  studio?: boolean | Prisma.StudiosDefaultArgs<ExtArgs>
-}
+export type ContentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "description" | "year" | "ageRating" | "likes" | "director" | "createdAt" | "updatedAt", ExtArgs["result"]["content"]>
 
 export type $ContentPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Content"
-  objects: {
-    studio: Prisma.$StudiosPayload<ExtArgs>
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
     description: string | null
+    year: number
     ageRating: string
     likes: number
-    studioId: string
-    filmType: string
+    director: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["content"]>
@@ -1091,7 +922,6 @@ readonly fields: ContentFieldRefs;
  */
 export interface Prisma__ContentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  studio<T extends Prisma.StudiosDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StudiosDefaultArgs<ExtArgs>>): Prisma.Prisma__StudiosClient<runtime.Types.Result.GetResult<Prisma.$StudiosPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1124,10 +954,10 @@ export interface ContentFieldRefs {
   readonly id: Prisma.FieldRef<"Content", 'String'>
   readonly title: Prisma.FieldRef<"Content", 'String'>
   readonly description: Prisma.FieldRef<"Content", 'String'>
+  readonly year: Prisma.FieldRef<"Content", 'Int'>
   readonly ageRating: Prisma.FieldRef<"Content", 'String'>
   readonly likes: Prisma.FieldRef<"Content", 'Int'>
-  readonly studioId: Prisma.FieldRef<"Content", 'String'>
-  readonly filmType: Prisma.FieldRef<"Content", 'String'>
+  readonly director: Prisma.FieldRef<"Content", 'String'>
   readonly createdAt: Prisma.FieldRef<"Content", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Content", 'DateTime'>
 }
@@ -1147,10 +977,6 @@ export type ContentFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  /**
    * Filter, which Content to fetch.
    */
   where: Prisma.ContentWhereUniqueInput
@@ -1169,10 +995,6 @@ export type ContentFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extension
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  /**
    * Filter, which Content to fetch.
    */
   where: Prisma.ContentWhereUniqueInput
@@ -1190,10 +1012,6 @@ export type ContentFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
   /**
    * Filter, which Content to fetch.
    */
@@ -1243,10 +1061,6 @@ export type ContentFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  /**
    * Filter, which Content to fetch.
    */
   where?: Prisma.ContentWhereInput
@@ -1294,10 +1108,6 @@ export type ContentFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
   /**
    * Filter, which Contents to fetch.
    */
@@ -1347,10 +1157,6 @@ export type ContentCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
-  /**
    * The data needed to create a Content.
    */
   data: Prisma.XOR<Prisma.ContentCreateInput, Prisma.ContentUncheckedCreateInput>
@@ -1384,10 +1190,6 @@ export type ContentCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    */
   data: Prisma.ContentCreateManyInput | Prisma.ContentCreateManyInput[]
   skipDuplicates?: boolean
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1402,10 +1204,6 @@ export type ContentUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
   /**
    * The data needed to update a Content.
    */
@@ -1458,10 +1256,6 @@ export type ContentUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensi
    * Limit how many Contents to update.
    */
   limit?: number
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1476,10 +1270,6 @@ export type ContentUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
   /**
    * The filter to search for the Content to update in case it exists.
    */
@@ -1506,10 +1296,6 @@ export type ContentDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
   /**
    * Filter which Content to delete.
    */
@@ -1542,8 +1328,4 @@ export type ContentDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the Content
    */
   omit?: Prisma.ContentOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ContentInclude<ExtArgs> | null
 }
