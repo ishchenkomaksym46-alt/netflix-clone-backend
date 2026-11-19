@@ -42,15 +42,15 @@ export class AuthController {
 
       res.cookie('access_token', signup.access_token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: 60 * 60 * 1000, // 1 hour
       });
 
       res.cookie('refresh_token', signup.refresh_token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
@@ -92,8 +92,8 @@ export class AuthController {
     } else if(response.status === 200){
       res.cookie('access_token', response.access_token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: 60 * 60 * 1000, // 1 hour
       });
 
@@ -115,15 +115,15 @@ export class AuthController {
 
       res.cookie('access_token', login.access_token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: 60 * 60 * 1000, // 1 hour
       });
 
       res.cookie('refresh_token', login.refresh_token, {
         httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
+        secure: true,
+        sameSite: 'none',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
@@ -139,29 +139,16 @@ export class AuthController {
   logout(@Res({ passthrough: true }) res: Response) {
     res.clearCookie('access_token', {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
     });
 
     res.clearCookie('refresh_token', {
       httpOnly: true,
-      secure: false,
-      sameSite: 'lax',
+      secure: true,
+      sameSite: 'none',
     });
 
     return { status: 200, message: "Logout successful" };
-  }
-
-  @Delete('delete-user')
-  async deleteUser(@Body('userId') userId: string) {
-    const result = await this.authService.deleteUser(userId);
-
-    if(result.status === 400) {
-      throw new NotFoundException(result.error);
-    } else if (result.status === 500) {
-      throw new InternalServerErrorException(result.error, result.message);
-    } else if(result.status === 200) {
-      return { status: 200, message: "User deleted successfully" };
-    }
   }
 }

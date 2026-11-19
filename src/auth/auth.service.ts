@@ -184,22 +184,4 @@ export class AuthService {
             return { status: 500, error: "Error occurred during logout", message: e.message };
         }
     }
-
-    async deleteUser(userId: string) {
-        if (!userId) {
-            return { status: 400, error: "Invalid user id" };
-        }
-
-        try {
-            await this.prisma.users.delete({
-                where: {
-                    id: userId
-                }
-            });
-
-            return { status: 200, message: 'User deleted' };
-        } catch (e: any) {
-            return { status: 500, error: "Error occurred during user deletion", message: e.message };
-        }
-    }
 }

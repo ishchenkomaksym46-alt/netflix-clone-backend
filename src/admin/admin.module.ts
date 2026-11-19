@@ -4,6 +4,7 @@ import {Module} from "@nestjs/common";
 import {JwtModule} from "@nestjs/jwt";
 import {ConfigService} from "@nestjs/config";
 import {AdminController} from "./admin.controller";
+import {RolesGuard} from "./guards/admin.guard";
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import {AdminController} from "./admin.controller";
     }),
   ],
   controllers: [AdminController],
-  providers: [AdminService, PrismaService],
+  providers: [AdminService, PrismaService, RolesGuard],
 })
 export class AdminModule {}
