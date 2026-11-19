@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: 'https://netflix-clone-onmz.vercel.app',
+    origin: 'netflix-clone-six-iota-71.vercel.app',
     credentials: true,
   });
 
